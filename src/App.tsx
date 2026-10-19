@@ -350,9 +350,9 @@ export default function App() {
           </div>
 
           {/* Visible Light Range Indicator Bar */}
-          <div className="relative w-full mb-2 h-4 text-[9px] sm:text-[10px] font-bold text-[var(--text-muted)] uppercase">
+          <div className="relative w-full mb-2 h-4 text-[6px] min-[360px]:text-[7px] sm:text-[9.5px] font-bold text-[var(--text-muted)] uppercase">
             <div className="absolute left-[10%] h-2 border-l border-[var(--border-main)] top-0" />
-            <div className="absolute left-[10%] right-[43.75%] text-center tracking-widest top-0">
+            <div className="absolute left-[10%] right-[43.75%] text-center tracking-tight sm:tracking-normal top-0 whitespace-nowrap flex items-center justify-center h-2 px-0.5">
               {t.vis_light} (380 - 750 nm)
             </div>
             <div className="absolute left-[56.25%] h-2 border-r border-[var(--border-main)] top-0" />
@@ -404,16 +404,16 @@ export default function App() {
             </h2>
 
             {/* Focal Length & Filters */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div className="flex flex-row gap-2 sm:gap-4 mb-4 sm:mb-6">
               {/* Focal Length */}
-              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[38px] sm:h-[42px] flex-1 bg-transparent">
-                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[9px] sm:text-[11px] font-bold tracking-wider flex items-center justify-center px-3 sm:px-4 shrink-0">
+              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[36px] sm:h-[42px] flex-1 min-w-0 bg-transparent">
+                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[7.5px] sm:text-[11px] font-bold tracking-tight sm:tracking-wider flex items-center justify-center px-1 sm:px-3 w-[54px] sm:w-[90px] shrink-0 text-center uppercase leading-tight">
                   {t.focal_len}
                 </div>
-                <div className="flex-1 relative flex items-center bg-[var(--bg-card)]">
+                <div className="flex-1 min-w-0 relative flex items-center bg-[var(--bg-card)]">
                   {state.focalLengthMode === 'preset' ? (
                     <>
-                      <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#E85002] absolute left-2 sm:left-3 pointer-events-none" />
+                      <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#E85002] absolute left-1.5 sm:left-3 pointer-events-none" />
                       <select
                         value={state.focalLength}
                         onChange={e => {
@@ -424,7 +424,7 @@ export default function App() {
                             setState(prev => ({ ...prev, focalLength: parseFloat(val) }));
                           }
                         }}
-                        className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[13px] sm:text-[16px] pl-7 sm:pl-9 pr-2 text-[var(--text-body)] cursor-pointer"
+                        className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[11px] sm:text-[15px] pl-5 sm:pl-9 pr-1 text-[var(--text-body)] cursor-pointer"
                       >
                         {FOCAL_PRESETS.map(f => (
                           <option key={f} value={f}>
@@ -435,25 +435,25 @@ export default function App() {
                       </select>
                     </>
                   ) : (
-                    <div className="w-full h-full flex items-center pl-2 pr-8 relative">
+                    <div className="w-full h-full flex items-center pl-1.5 pr-6 sm:pr-8 relative">
                       <input
                         type="number"
                         value={state.focalLength}
                         min={1}
                         onChange={e => setState(prev => ({ ...prev, focalLength: parseFloat(e.target.value) || 0 }))}
-                        className="w-full h-full bg-transparent outline-none font-mono text-[13px] sm:text-[16px] text-[var(--text-body)] no-spinners text-right pr-2"
+                        className="w-full h-full bg-transparent outline-none font-mono text-[11px] sm:text-[15px] text-[var(--text-body)] no-spinners text-right pr-1"
                         placeholder="e.g. 58"
                       />
-                      <span className="font-mono text-[12px] sm:text-[15px] text-[var(--text-body)] pointer-events-none">
+                      <span className="font-mono text-[10px] sm:text-[14px] text-[var(--text-body)] pointer-events-none">
                         mm
                       </span>
                       <button
                         type="button"
                         onClick={() => setState(prev => ({ ...prev, focalLengthMode: 'preset', focalLength: 200 }))}
-                        className="absolute right-1 sm:right-1.5 w-6 h-6 flex items-center justify-center text-[var(--text-muted)] hover:text-[#E85002] transition-colors rounded-full"
+                        className="absolute right-1 sm:right-1.5 w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center text-[var(--text-muted)] hover:text-[#E85002] transition-colors rounded-full"
                         title={t.reset_to_preset}
                       >
-                        <RotateCcw className="w-3.5 h-3.5" />
+                        <RotateCcw className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </button>
                     </div>
                   )}
@@ -461,16 +461,16 @@ export default function App() {
               </div>
 
               {/* Filters */}
-              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[38px] sm:h-[42px] flex-1 bg-transparent">
-                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[9px] sm:text-[11px] font-bold tracking-wider flex items-center justify-center px-3 sm:px-4 shrink-0">
+              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[36px] sm:h-[42px] flex-1 min-w-0 bg-transparent">
+                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[7.5px] sm:text-[11px] font-bold tracking-tight sm:tracking-wider flex items-center justify-center px-1 sm:px-3 w-[54px] sm:w-[90px] shrink-0 text-center uppercase leading-tight">
                   {t.filters}
                 </div>
-                <div className="flex-1 relative flex items-center bg-[var(--bg-card)]">
-                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#E85002] absolute left-2 sm:left-3 pointer-events-none" />
+                <div className="flex-1 min-w-0 relative flex items-center bg-[var(--bg-card)]">
+                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#E85002] absolute left-1.5 sm:left-3 pointer-events-none" />
                   <select
                     value={state.activeFilter}
                     onChange={e => handleFilterChange(e.target.value)}
-                    className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[12px] sm:text-[15px] pl-7 sm:pl-9 pr-2 text-[var(--text-body)] cursor-pointer"
+                    className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[11px] sm:text-[15px] pl-5 sm:pl-9 pr-1 text-[var(--text-body)] cursor-pointer"
                   >
                     {FILTERS.map(f => (
                       <option key={f.value} value={f.value}>
@@ -636,18 +636,18 @@ export default function App() {
             </h2>
 
             {/* Top Banner (Tolerance Selector & DLA Display) */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div className="flex flex-row gap-2 sm:gap-4 mb-4 sm:mb-6">
               {/* Tolerance Selector */}
-              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[38px] sm:h-[42px] flex-[1.2] bg-transparent">
-                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[9px] sm:text-[11px] font-bold tracking-wider flex items-center justify-center px-3 sm:px-4 shrink-0">
+              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[36px] sm:h-[42px] flex-1 min-w-0 bg-transparent">
+                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[7.5px] sm:text-[11px] font-bold tracking-tight sm:tracking-wider flex items-center justify-center px-1 sm:px-3 w-[54px] sm:w-[90px] shrink-0 text-center uppercase leading-tight">
                   {t.tolerance}
                 </div>
-                <div className="flex-1 relative flex items-center bg-[var(--bg-card)]">
-                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#E85002] absolute left-2 pointer-events-none" />
+                <div className="flex-1 min-w-0 relative flex items-center bg-[var(--bg-card)]">
+                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#E85002] absolute left-1.5 sm:left-3 pointer-events-none" />
                   <select
                     value={state.tolerance}
                     onChange={e => setState(prev => ({ ...prev, tolerance: parseInt(e.target.value, 10) as Tolerance }))}
-                    className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[12px] sm:text-[14px] pl-6 sm:pl-8 pr-2 text-[var(--text-body)] cursor-pointer"
+                    className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[10px] sm:text-[14px] pl-5 sm:pl-9 pr-1 text-[var(--text-body)] cursor-pointer"
                   >
                     <option value={1}>{t.t_physic}</option>
                     <option value={2}>{t.t_nyquist}</option>
@@ -657,12 +657,12 @@ export default function App() {
               </div>
 
               {/* DLA Readout */}
-              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[38px] sm:h-[42px] flex-[0.8] bg-[var(--bg-card)]">
-                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[9px] sm:text-[11px] font-bold tracking-wider flex items-center justify-center px-3 sm:px-4 shrink-0">
+              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[36px] sm:h-[42px] flex-1 min-w-0 bg-[var(--bg-card)]">
+                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[7.5px] sm:text-[11px] font-bold tracking-tight sm:tracking-wider flex items-center justify-center px-1 sm:px-3 w-[54px] sm:w-[90px] shrink-0 text-center uppercase leading-tight">
                   DLA
                 </div>
-                <div className="flex-1 flex items-center justify-end px-3">
-                  <span className="font-mono text-[16px] sm:text-[20px] font-bold text-[#E85002]">
+                <div className="flex-1 min-w-0 flex items-center justify-end px-2 sm:px-3">
+                  <span className="font-mono text-[13px] sm:text-[18px] font-bold text-[#E85002]">
                     f/{results.dlaFNumber.toFixed(1)}
                   </span>
                 </div>
