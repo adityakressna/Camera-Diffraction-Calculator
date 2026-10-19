@@ -19,16 +19,13 @@ import { Mode, Tolerance, Language, OpticsState, AnamorphicSqueeze } from './typ
 import { calculateOpticsData, computeSharpnessCurve, getWaveColor } from './utils/optics';
 import { DiffractionCanvas } from './components/DiffractionCanvas';
 import { SharpnessChart } from './components/SharpnessChart';
-import { AnalysisModal } from './components/AnalysisModal';
 import { CameraReportModal } from './components/CameraReportModal';
-import { ChevronDown, Moon, Sun, Copy, Check, FileCode, RotateCcw, FileDown } from 'lucide-react';
+import { ChevronDown, Moon, Sun, RotateCcw, FileDown } from 'lucide-react';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('id');
   const [isDark, setIsDark] = useState<boolean>(false);
-  const [showAnalysis, setShowAnalysis] = useState<boolean>(false);
   const [showReportModal, setShowReportModal] = useState<boolean>(false);
-  const [copied, setCopied] = useState<boolean>(false);
 
   // Optical State
   const [state, setState] = useState<OpticsState>({
@@ -141,28 +138,6 @@ export default function App() {
     return `${state.sensorWidth} x ${state.sensorHeight} mm`;
   }, [selectedPreset, state.sensorWidth, state.sensorHeight]);
 
-  // Copy quick summary to clipboard
-  const handleCopySummary = () => {
-    const summary = `
-[Diffraction Calculator Setup]
-- Sensor: ${state.sensorWidth}mm x ${state.sensorHeight}mm (${state.mode.toUpperCase()})
-- Preset: ${currentPresetLabel}
-- Pixel Pitch: ${results.pixelPitchMicrons.toFixed(2)} µm
-- Aperture: f/${results.fNumber.toFixed(1)} (T/${results.tStop.toFixed(1)})
-- Focal Length: ${state.focalLength}mm (Entrance Pupil: ${results.entrancePupilMm.toFixed(2)}mm)
-- Anamorphic Squeeze: ${state.anamorphicSqueeze}x (${results.desqueezedAspectLabel})
-- Wavelength: ${state.wavelengthNm} nm
-- Airy Disk Ø: ${results.airyDiskMicrons.toFixed(2)} µm
-- Diffraction Limited Aperture (DLA): f/${results.dlaFNumber.toFixed(1)}
-- Sharpness Status: ${results.status.toUpperCase()} (${t[`s_${results.status}` as keyof typeof t]})
-- Tolerance: ${state.tolerance}X
-    `.trim();
-
-    navigator.clipboard.writeText(summary);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <div className="p-3 sm:p-6 lg:p-8 min-h-screen">
       <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6 relative">
@@ -173,34 +148,15 @@ export default function App() {
             {t.title}
           </h1>
 
-          {/* Action buttons: Lang, Theme, Analysis, Copy, PDF */}
+          {/* Action buttons: Shot Sheet PDF, Lang, Theme */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={() => setShowReportModal(true)}
-              className="flex items-center gap-1.5 h-8 sm:h-9 px-2 sm:px-3 rounded-lg border border-[#E85002] bg-[#E85002] text-white hover:bg-[#d44700] font-mono text-[10px] sm:text-[12px] font-bold transition-all shadow-sm active:scale-95"
+              className="flex items-center gap-1.5 h-8 sm:h-9 px-2.5 sm:px-3 rounded-lg border border-[var(--border-main)] bg-[var(--bg-card)] text-[#E85002] hover:bg-[var(--btn-hover)] font-mono text-[10px] sm:text-[12px] font-bold transition-all shadow-sm active:scale-95"
               title="One-click Camera Report / Shot Sheet PDF export"
             >
-              <FileDown className="w-3.5 h-3.5" />
-              <span>{t.camera_report_btn}</span>
-            </button>
-
-            <button
-              onClick={() => setShowAnalysis(true)}
-              className="flex items-center gap-1.5 h-8 sm:h-9 px-2 sm:px-2.5 rounded-lg border border-[#E85002]/60 bg-[#E85002]/10 text-[#E85002] hover:bg-[#E85002]/20 font-mono text-[10px] sm:text-[12px] font-bold transition-all"
-              title="View full code & physics analysis"
-            >
-              <FileCode className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">{t.code_analysis_btn}</span>
-              <span className="md:hidden">Analisis</span>
-            </button>
-
-            <button
-              onClick={handleCopySummary}
-              className="flex items-center gap-1.5 h-8 sm:h-9 px-2 sm:px-2.5 rounded-lg border border-[var(--border-main)] bg-[var(--bg-card)] text-[var(--text-body)] hover:bg-[var(--btn-hover)] font-mono text-[10px] sm:text-[12px] font-bold transition-all"
-              title="Copy optical summary"
-            >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-              <span className="hidden sm:inline">{copied ? t.copied : t.copy_summary}</span>
+              <FileDown className="w-3.5 h-3.5 text-[#E85002]" />
+              <span className="text-[#E85002]">{t.camera_report_btn}</span>
             </button>
 
             <button
@@ -806,13 +762,6 @@ export default function App() {
         </div>
 
       </div>
-
-      {/* Code & Optics Analysis Modal */}
-      <AnalysisModal
-        isOpen={showAnalysis}
-        onClose={() => setShowAnalysis(false)}
-        lang={lang}
-      />
 
       {/* One-click Camera Report & Shot Sheet PDF Modal */}
       <CameraReportModal
