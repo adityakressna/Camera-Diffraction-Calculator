@@ -428,7 +428,12 @@ export const TRANSLATIONS = {
     camera_report_btn: "Shot Sheet PDF",
     export_pdf: "Export Camera Report PDF",
     aspect_ratio: "ASPECT RATIO",
-    desqueezed: "DESQUEEZED"
+    desqueezed: "DESQUEEZED",
+    brand_cat: "BRAND / SYSTEM",
+    model_cam: "CAMERA MODEL",
+    search_cam: "Search camera model (e.g. FX3, R5, D850)...",
+    all_brands: "— ALL BRANDS & FORMATS —",
+    no_results: "No cameras found"
   },
   id: {
     title: "KALKULATOR DIFRAKSI LENSA KAMERA",
@@ -473,6 +478,11 @@ export const TRANSLATIONS = {
     camera_report_btn: "Shot Sheet PDF",
     export_pdf: "Ekspor Camera Report PDF",
     aspect_ratio: "ASIO ASPEK",
-    desqueezed: "DESQUEEZED"
+    desqueezed: "DESQUEEZED",
+    brand_cat: "BRAND / SISTEM",
+    model_cam: "MODEL KAMERA",
+    search_cam: "Cari model kamera (cth: FX3, R5, D850)...",
+    all_brands: "— SEMUA BRAND & FORMAT —",
+    no_results: "Kamera tidak ditemukan"
   }
 };
