@@ -3,11 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   CAMERA_PRESET_GROUPS,
   CAMERA_PRESET_MAP,
-  ALL_CAMERA_PRESETS,
   getPresetKey,
   F_STOPS,
   STOPS_LABELS,
@@ -23,7 +22,7 @@ import { calculateOpticsData, computeSharpnessCurve, getWaveColor } from './util
 import { DiffractionCanvas } from './components/DiffractionCanvas';
 import { SharpnessChart } from './components/SharpnessChart';
 import { CameraReportModal } from './components/CameraReportModal';
-import { ChevronDown, Moon, Sun, RotateCcw, FileDown, Search, X } from 'lucide-react';
+import { ChevronDown, Moon, Sun, RotateCcw, FileDown } from 'lucide-react';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('id');
@@ -47,11 +46,7 @@ export default function App() {
     anamorphicSqueeze: 1.0,
   });
 
-  const [selectedPreset, setSelectedPreset] = useState<string>('Sony Cinema Line::FX6 / FX3 / FR7');
-  const [selectedBrand, setSelectedBrand] = useState<string>('Sony Cinema Line');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const [selectedPreset, setSelectedPreset] = useState<string>('Sony Cinema Line::Sony FX3');
 
   // Sync dark theme class on document.body
   useEffect(() => {
@@ -61,19 +56,6 @@ export default function App() {
       document.body.classList.remove('dark-theme');
     }
   }, [isDark]);
-
-  // Close search dropdown on click outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
-        setIsSearchOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   const t = TRANSLATIONS[lang];
 
@@ -91,17 +73,14 @@ export default function App() {
 
   const waveColor = useMemo(() => getWaveColor(state.wavelengthNm), [state.wavelengthNm]);
 
-  // Select camera preset helper
-  const selectCameraPreset = (presetKey: string) => {
-    setSelectedPreset(presetKey);
-    if (presetKey === 'custom') {
-      setSelectedBrand('custom');
-      return;
-    }
+  // Handler for camera preset dropdown change
+  const handlePresetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const val = e.target.value;
+    setSelectedPreset(val);
+    if (val === 'custom') return;
 
-    const preset = CAMERA_PRESET_MAP[presetKey];
+    const preset = CAMERA_PRESET_MAP[val];
     if (preset) {
-      setSelectedBrand(preset.groupName);
       const isFilm = Boolean(preset.isFilm || preset.groupName.toLowerCase().includes('film'));
       setState(prev => ({
         ...prev,
@@ -112,64 +91,6 @@ export default function App() {
       }));
     }
   };
-
-  // Handler for Brand / Category dropdown
-  const handleBrandChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const brand = e.target.value;
-    setSelectedBrand(brand);
-    if (brand === 'custom') {
-      setSelectedPreset('custom');
-      return;
-    }
-    if (brand === 'all') {
-      return;
-    }
-
-    // If current preset belongs to selected brand, keep it
-    const current = CAMERA_PRESET_MAP[selectedPreset];
-    if (current && current.groupName === brand) {
-      return;
-    }
-
-    // Otherwise select the first preset of this brand
-    const grp = CAMERA_PRESET_GROUPS.find(g => g.groupName === brand);
-    if (grp && grp.presets.length > 0) {
-      const firstKey = getPresetKey(grp.groupName, grp.presets[0]);
-      selectCameraPreset(firstKey);
-    }
-  };
-
-  // Handler for camera preset dropdown change
-  const handlePresetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    selectCameraPreset(e.target.value);
-  };
-
-  // Available camera presets based on chosen brand
-  const availablePresets = useMemo(() => {
-    if (selectedBrand === 'all') {
-      return ALL_CAMERA_PRESETS;
-    }
-    if (selectedBrand === 'custom') {
-      return [];
-    }
-    const grp = CAMERA_PRESET_GROUPS.find(g => g.groupName === selectedBrand);
-    if (!grp) return [];
-    return grp.presets.map(p => ({
-      ...p,
-      key: getPresetKey(grp.groupName, p),
-      groupName: grp.groupName,
-    }));
-  }, [selectedBrand]);
-
-  // Filtered camera presets for search bar
-  const searchResults = useMemo(() => {
-    const cleanQ = searchQuery.trim().toLowerCase().replace(/[\s\-_/]/g, '');
-    if (!cleanQ) return [];
-    return ALL_CAMERA_PRESETS.filter(p => {
-      const text = (p.label + ' ' + p.groupName).toLowerCase().replace(/[\s\-_/]/g, '');
-      return text.includes(cleanQ);
-    }).slice(0, 8);
-  }, [searchQuery]);
 
   // Handler for filter dropdown
   const handleFilterChange = (filterVal: string) => {
@@ -256,134 +177,32 @@ export default function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 sm:gap-y-6">
             {/* Left Column: Camera Preset & Dimensions */}
-            <div className="space-y-2.5 sm:space-y-3">
-              {/* Quick Camera Search */}
-              <div ref={searchContainerRef} className="relative">
-                <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[36px] sm:h-[40px] bg-transparent items-center px-2.5 sm:px-3 focus-within:border-[#E85002] transition-colors">
-                  <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E85002] shrink-0 mr-2" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={e => {
-                      setSearchQuery(e.target.value);
-                      setIsSearchOpen(true);
-                    }}
-                    onFocus={() => {
-                      if (searchQuery.trim()) setIsSearchOpen(true);
-                    }}
-                    placeholder={t.search_cam}
-                    className="w-full bg-transparent outline-none font-mono text-[11px] sm:text-[13px] text-[var(--text-body)] placeholder:text-[var(--text-muted)]"
-                  />
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSearchQuery('');
-                        setIsSearchOpen(false);
-                      }}
-                      className="text-[var(--text-muted)] hover:text-[var(--text-body)] p-1 text-xs cursor-pointer"
-                      title="Clear search"
-                    >
-                      <X className="w-3.5 h-3.5" />
-                    </button>
-                  )}
-                </div>
-
-                {/* Live Search Results Dropdown */}
-                {isSearchOpen && searchQuery.trim() !== '' && (
-                  <div className="absolute z-40 left-0 right-0 mt-1 max-h-64 overflow-y-auto rounded-lg border border-[var(--border-main)] bg-[var(--bg-card)] shadow-2xl p-1 divide-y divide-[var(--border-main)]">
-                    {searchResults.length > 0 ? (
-                      searchResults.map(p => (
-                        <button
-                          key={p.key}
-                          type="button"
-                          onClick={() => {
-                            selectCameraPreset(p.key);
-                            setSearchQuery('');
-                            setIsSearchOpen(false);
-                          }}
-                          className="w-full text-left p-2 hover:bg-[var(--btn-hover)] transition-colors rounded flex flex-col gap-0.5 cursor-pointer"
-                        >
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="font-mono text-[12px] sm:text-[13px] font-bold text-[var(--text-title)] truncate">
-                              {p.label}
-                            </span>
-                            <span className="text-[9px] sm:text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#E85002]/15 text-[#E85002] font-semibold shrink-0">
-                              {p.groupName}
-                            </span>
-                          </div>
-                          <div className="text-[10px] sm:text-[11px] font-mono text-[var(--text-muted)]">
-                            {p.width} × {p.height} mm • {p.megapixels} MP {p.isFilm ? '(Film)' : ''}
-                          </div>
-                        </button>
-                      ))
-                    ) : (
-                      <div className="p-3 text-center text-xs font-mono text-[var(--text-muted)]">
-                        {t.no_results}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Brand / Kategori Dropdown */}
-              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[36px] sm:h-[40px] bg-transparent transition-colors">
+            <div className="space-y-3 sm:space-y-4">
+              {/* Sensor / Film Preset Dropdown */}
+              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[38px] sm:h-[42px] bg-transparent transition-colors">
                 <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[9px] sm:text-[11px] font-bold tracking-wider flex items-center justify-center px-2 sm:px-4 w-[90px] sm:w-[140px] shrink-0">
-                  {t.brand_cat}
-                </div>
-                <div className="flex-1 relative flex items-center">
-                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#E85002] absolute left-2 sm:left-3 pointer-events-none" />
-                  <select
-                    value={selectedBrand}
-                    onChange={handleBrandChange}
-                    className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[11px] sm:text-[14px] pl-7 sm:pl-10 pr-3 text-[var(--text-body)] cursor-pointer truncate"
-                  >
-                    <option value="all">{t.all_brands}</option>
-                    <option value="custom">{t.custom_dim}</option>
-                    {CAMERA_PRESET_GROUPS.map(grp => (
-                      <option key={grp.groupName} value={grp.groupName}>
-                        {grp.groupName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Model Kamera Dropdown */}
-              <div className="flex border border-[var(--border-main)] rounded-lg overflow-hidden h-[36px] sm:h-[40px] bg-transparent transition-colors">
-                <div className="bg-[var(--label-bg)] text-[var(--label-text)] text-[9px] sm:text-[11px] font-bold tracking-wider flex items-center justify-center px-2 sm:px-4 w-[90px] sm:w-[140px] shrink-0">
-                  {t.model_cam}
+                  {t.sensor_film}
                 </div>
                 <div className="flex-1 relative flex items-center">
                   <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-[#E85002] absolute left-2 sm:left-3 pointer-events-none" />
                   <select
                     value={selectedPreset}
                     onChange={handlePresetChange}
-                    className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[11px] sm:text-[14px] pl-7 sm:pl-10 pr-3 text-[var(--text-body)] cursor-pointer truncate"
+                    className="w-full h-full bg-transparent appearance-none outline-none font-mono text-[12px] sm:text-[15px] pl-7 sm:pl-10 pr-3 text-[var(--text-body)] cursor-pointer truncate"
                   >
-                    {selectedBrand === 'custom' && (
-                      <option value="custom">{t.custom_dim}</option>
-                    )}
-                    {selectedBrand === 'all' ? (
-                      CAMERA_PRESET_GROUPS.map(grp => (
-                        <optgroup key={grp.groupName} label={grp.groupName}>
-                          {grp.presets.map(p => {
-                            const key = getPresetKey(grp.groupName, p);
-                            return (
-                              <option key={key} value={key}>
-                                {p.label}
-                              </option>
-                            );
-                          })}
-                        </optgroup>
-                      ))
-                    ) : (
-                      availablePresets.map(p => (
-                        <option key={p.key} value={p.key}>
-                          {p.label}
-                        </option>
-                      ))
-                    )}
+                    <option value="custom">{t.custom_dim}</option>
+                    {CAMERA_PRESET_GROUPS.map(grp => (
+                      <optgroup key={grp.groupName} label={grp.groupName}>
+                        {grp.presets.map(p => {
+                          const key = getPresetKey(grp.groupName, p);
+                          return (
+                            <option key={key} value={key}>
+                              {p.label}
+                            </option>
+                          );
+                        })}
+                      </optgroup>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -402,7 +221,6 @@ export default function App() {
                       min={1}
                       onChange={e => {
                         setSelectedPreset('custom');
-                        setSelectedBrand('custom');
                         setState(prev => ({ ...prev, sensorWidth: parseFloat(e.target.value) || 0 }));
                       }}
                       className="w-full bg-transparent outline-none font-mono text-[13px] sm:text-sm text-center text-[var(--text-body)] no-spinners"
@@ -423,7 +241,6 @@ export default function App() {
                       min={1}
                       onChange={e => {
                         setSelectedPreset('custom');
-                        setSelectedBrand('custom');
                         setState(prev => ({ ...prev, sensorHeight: parseFloat(e.target.value) || 0 }));
                       }}
                       className="w-full bg-transparent outline-none font-mono text-[13px] sm:text-sm text-center text-[var(--text-body)] no-spinners"
@@ -471,7 +288,6 @@ export default function App() {
                         min={0.1}
                         onChange={e => {
                           setSelectedPreset('custom');
-                          setSelectedBrand('custom');
                           setState(prev => ({ ...prev, megapixels: parseFloat(e.target.value) || 0 }));
                         }}
                         className="w-full bg-transparent outline-none font-mono text-[14px] sm:text-lg text-[var(--text-body)] font-bold text-center"

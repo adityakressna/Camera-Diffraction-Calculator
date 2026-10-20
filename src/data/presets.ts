@@ -46,10 +46,14 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
     groupName: 'ARRI',
     presets: [
       { label: 'ALEXA 65', width: 54.12, height: 25.58, megapixels: 20.3 },
-      { label: 'ALEXA Mini LF / ALEXA LF', width: 36.70, height: 25.54, megapixels: 13.8 },
+      { label: 'ALEXA LF', width: 36.70, height: 25.54, megapixels: 13.8 },
+      { label: 'ALEXA Mini LF', width: 36.70, height: 25.54, megapixels: 13.8 },
       { label: 'ALEXA 35', width: 27.99, height: 19.22, megapixels: 14.6 },
-      { label: 'ALEXA Mini / AMIRA', width: 28.25, height: 18.17, megapixels: 7.5 },
-      { label: 'ALEXA SXT / XT / Classic', width: 28.25, height: 18.17, megapixels: 7.5 },
+      { label: 'ALEXA Mini', width: 28.25, height: 18.17, megapixels: 7.5 },
+      { label: 'AMIRA', width: 28.25, height: 18.17, megapixels: 7.5 },
+      { label: 'ALEXA SXT', width: 28.25, height: 18.17, megapixels: 7.5 },
+      { label: 'ALEXA XT', width: 28.25, height: 18.17, megapixels: 7.5 },
+      { label: 'ALEXA Classic', width: 28.25, height: 18.17, megapixels: 7.5 },
     ]
   },
   {
@@ -57,7 +61,8 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
     presets: [
       { label: 'URSA Cine 17K (65mm)', width: 50.8, height: 23.3, megapixels: 140.0 },
       { label: 'URSA Cine 12K (Full Frame)', width: 35.6, height: 23.3, megapixels: 98.8 },
-      { label: 'PYXIS 6K / Cinema Camera 6K', width: 35.6, height: 23.8, megapixels: 24.6 },
+      { label: 'PYXIS 6K', width: 35.6, height: 23.8, megapixels: 24.6 },
+      { label: 'Cinema Camera 6K (Full Frame)', width: 35.6, height: 23.8, megapixels: 24.6 },
     ]
   },
   {
@@ -65,7 +70,10 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
     presets: [
       { label: 'URSA Mini Pro 12K OLPF', width: 27.0, height: 14.3, megapixels: 79.6 },
       { label: 'URSA Mini Pro 4.6K G2', width: 25.3, height: 14.3, megapixels: 11.9 },
-      { label: 'Pocket 6K Pro / URSA Broadcast G2', width: 23.1, height: 13.0, megapixels: 21.2 },
+      { label: 'Pocket Cinema Camera 6K Pro', width: 23.1, height: 13.0, megapixels: 21.2 },
+      { label: 'Pocket Cinema Camera 6K G2', width: 23.1, height: 13.0, megapixels: 21.2 },
+      { label: 'Pocket Cinema Camera 6K', width: 23.1, height: 13.0, megapixels: 21.2 },
+      { label: 'URSA Broadcast G2', width: 23.1, height: 13.0, megapixels: 21.2 },
       { label: 'Pocket Cinema Camera 4K', width: 19.0, height: 10.0, megapixels: 8.8 },
     ]
   },
@@ -73,40 +81,55 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
     groupName: 'Blackmagic Design (Studio & Micro)',
     presets: [
       { label: 'Studio Camera 6K Pro', width: 23.1, height: 13.0, megapixels: 21.2 },
-      { label: 'Studio 4K Plus/Pro G2 / Micro 4K', width: 17.8, height: 10.0, megapixels: 8.8 },
+      { label: 'Studio Camera 4K Pro G2', width: 17.8, height: 10.0, megapixels: 8.8 },
+      { label: 'Studio Camera 4K Plus G2', width: 17.8, height: 10.0, megapixels: 8.8 },
+      { label: 'Micro Studio Camera 4K G2', width: 17.8, height: 10.0, megapixels: 8.8 },
     ]
   },
   {
     groupName: 'Canon Mirrorless (Full Frame)',
     presets: [
-      { label: 'EOS R5 / R5 Mark II / R5 C', width: 35.6, height: 23.8, megapixels: 45.0 },
-      { label: 'EOS R', width: 35.6, height: 23.8, megapixels: 30.3 },
-      { label: 'EOS RP', width: 35.6, height: 23.8, megapixels: 26.2 },
-      { label: 'EOS R1 / R3 / R6 Series / R8', width: 35.6, height: 23.8, megapixels: 24.2 },
-      { label: 'EOS R6', width: 35.6, height: 23.8, megapixels: 20.1 },
+      { label: 'Canon EOS R5', width: 35.6, height: 23.8, megapixels: 45.0 },
+      { label: 'Canon EOS R5 Mark II', width: 35.6, height: 23.8, megapixels: 45.0 },
+      { label: 'Canon EOS R5 C', width: 35.6, height: 23.8, megapixels: 45.0 },
+      { label: 'Canon EOS R', width: 35.6, height: 23.8, megapixels: 30.3 },
+      { label: 'Canon EOS RP', width: 35.6, height: 23.8, megapixels: 26.2 },
+      { label: 'Canon EOS R1', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Canon EOS R3', width: 35.6, height: 23.8, megapixels: 24.1 },
+      { label: 'Canon EOS R6 Mark II', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Canon EOS R8', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Canon EOS R6', width: 35.6, height: 23.8, megapixels: 20.1 },
     ]
   },
   {
     groupName: 'Canon Mirrorless (APS-C)',
     presets: [
-      { label: 'EOS R7', width: 22.2, height: 14.8, megapixels: 32.5 },
-      { label: 'EOS R10 / R50 / R100', width: 22.2, height: 14.8, megapixels: 24.2 },
+      { label: 'Canon EOS R7', width: 22.2, height: 14.8, megapixels: 32.5 },
+      { label: 'Canon EOS R10', width: 22.2, height: 14.8, megapixels: 24.2 },
+      { label: 'Canon EOS R50', width: 22.2, height: 14.8, megapixels: 24.2 },
+      { label: 'Canon EOS R100', width: 22.2, height: 14.8, megapixels: 24.1 },
     ]
   },
   {
     groupName: 'Canon Cinema EOS',
     presets: [
-      { label: 'EOS C500 Mark II / C700 FF', width: 38.1, height: 20.1, megapixels: 18.7 },
-      { label: 'EOS C400', width: 35.6, height: 23.8, megapixels: 26.7 },
-      { label: 'EOS C300 Mark III / EOS C70', width: 26.2, height: 13.8, megapixels: 9.6 },
-      { label: 'EOS C200 / C100 Mark II', width: 24.6, height: 13.8, megapixels: 8.8 },
+      { label: 'Canon EOS C500 Mark II', width: 38.1, height: 20.1, megapixels: 18.7 },
+      { label: 'Canon EOS C700 FF', width: 38.1, height: 20.1, megapixels: 18.7 },
+      { label: 'Canon EOS C400', width: 35.6, height: 23.8, megapixels: 26.7 },
+      { label: 'Canon EOS C300 Mark III', width: 26.2, height: 13.8, megapixels: 9.6 },
+      { label: 'Canon EOS C70', width: 26.2, height: 13.8, megapixels: 9.6 },
+      { label: 'Canon EOS C200', width: 24.6, height: 13.8, megapixels: 8.8 },
+      { label: 'Canon EOS C100 Mark II', width: 24.6, height: 13.8, megapixels: 8.8 },
     ]
   },
   {
     groupName: 'Canon Pro Camcorders',
     presets: [
-      { label: 'XF605 / XA75 / XA70 (1-inch)', width: 13.2, height: 8.8, megapixels: 8.2 },
-      { label: 'XA65 / XA60 / LEGRIA (1/2.3-inch)', width: 6.17, height: 4.55, megapixels: 8.2 },
+      { label: 'Canon XF605 (1-inch)', width: 13.2, height: 8.8, megapixels: 8.29 },
+      { label: 'Canon XA75 (1-inch)', width: 13.2, height: 8.8, megapixels: 8.29 },
+      { label: 'Canon XA70 (1-inch)', width: 13.2, height: 8.8, megapixels: 8.29 },
+      { label: 'Canon XA65 (1/2.3-inch)', width: 6.17, height: 4.55, megapixels: 8.29 },
+      { label: 'Canon XA60 (1/2.3-inch)', width: 6.17, height: 4.55, megapixels: 8.29 },
     ]
   },
   {
@@ -115,7 +138,7 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
       { label: 'Ember S5K', width: 23.04, height: 18.43, megapixels: 21.0 },
       { label: 'Ember S2.5K', width: 23.04, height: 18.43, megapixels: 5.2 },
       { label: 'Wave 4K', width: 22.53, height: 16.90, megapixels: 12.6 },
-      { label: 'Astro Drone (Sony LR1 / A7R IV Payload)', width: 35.6, height: 23.8, megapixels: 61.0 },
+      { label: 'Astro Drone (Sony LR1 Payload)', width: 35.6, height: 23.8, megapixels: 61.0 },
     ]
   },
   {
@@ -169,38 +192,58 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
   {
     groupName: 'Fujifilm GFX (Medium Format)',
     presets: [
-      { label: 'GFX100 II / GFX100S II / GFX100', width: 43.8, height: 32.9, megapixels: 102.0 },
-      { label: 'GFX50S II / GFX50S / GFX50R', width: 43.8, height: 32.9, megapixels: 51.4 },
+      { label: 'Fujifilm GFX100 II', width: 43.8, height: 32.9, megapixels: 102.0 },
+      { label: 'Fujifilm GFX100S II', width: 43.8, height: 32.9, megapixels: 102.0 },
+      { label: 'Fujifilm GFX100', width: 43.8, height: 32.9, megapixels: 102.0 },
+      { label: 'Fujifilm GFX100S', width: 43.8, height: 32.9, megapixels: 102.0 },
+      { label: 'Fujifilm GFX50S II', width: 43.8, height: 32.9, megapixels: 51.4 },
+      { label: 'Fujifilm GFX50S', width: 43.8, height: 32.9, megapixels: 51.4 },
+      { label: 'Fujifilm GFX50R', width: 43.8, height: 32.9, megapixels: 51.4 },
     ]
   },
   {
     groupName: 'Fujifilm X-Series (APS-C)',
     presets: [
-      { label: 'X-H2 / X-T5 / X100VI', width: 23.5, height: 15.6, megapixels: 40.2 },
-      { label: 'X-H2S / X-S20 / X-T4 / X-T30 II / X100V', width: 23.5, height: 15.6, megapixels: 26.1 },
-      { label: 'X-T3 / X-Pro3 / X-T200 / X-E4', width: 23.5, height: 15.6, megapixels: 24.3 },
+      { label: 'Fujifilm X-T5', width: 23.5, height: 15.6, megapixels: 40.2 },
+      { label: 'Fujifilm X-H2', width: 23.5, height: 15.6, megapixels: 40.2 },
+      { label: 'Fujifilm X-T50', width: 23.5, height: 15.6, megapixels: 40.2 },
+      { label: 'Fujifilm X100VI', width: 23.5, height: 15.6, megapixels: 40.2 },
+      { label: 'Fujifilm X-H2S', width: 23.5, height: 15.6, megapixels: 26.1 },
+      { label: 'Fujifilm X-T4', width: 23.5, height: 15.6, megapixels: 26.1 },
+      { label: 'Fujifilm X-S20', width: 23.5, height: 15.6, megapixels: 26.1 },
+      { label: 'Fujifilm X-T30 II', width: 23.5, height: 15.6, megapixels: 26.1 },
+      { label: 'Fujifilm X100V', width: 23.5, height: 15.6, megapixels: 26.1 },
+      { label: 'Fujifilm X-T3', width: 23.5, height: 15.6, megapixels: 26.1 },
+      { label: 'Fujifilm X-Pro3', width: 23.5, height: 15.6, megapixels: 26.1 },
+      { label: 'Fujifilm X-E4', width: 23.5, height: 15.6, megapixels: 26.1 },
+      { label: 'Fujifilm X-T200', width: 23.5, height: 15.6, megapixels: 24.2 },
     ]
   },
   {
     groupName: 'Hasselblad X & 907X System (Medium Format)',
     presets: [
-      { label: 'X2D 100C / 907X 100C / CFV 100C', width: 43.8, height: 32.9, megapixels: 100.0 },
-      { label: 'X1D II 50C / 907X 50C / CFV II 50C', width: 43.8, height: 32.9, megapixels: 50.0 },
+      { label: 'Hasselblad X2D 100C', width: 43.8, height: 32.9, megapixels: 100.0 },
+      { label: 'Hasselblad 907X & CFV 100C', width: 43.8, height: 32.9, megapixels: 100.0 },
+      { label: 'Hasselblad X1D II 50C', width: 43.8, height: 32.9, megapixels: 50.0 },
+      { label: 'Hasselblad 907X & CFV II 50C', width: 43.8, height: 32.9, megapixels: 50.0 },
     ]
   },
   {
     groupName: 'Hasselblad H System (Medium Format)',
     presets: [
-      { label: 'H6D-100c / H6D-400c MS', width: 53.4, height: 40.0, megapixels: 100.0 },
-      { label: 'H6D-50c', width: 43.8, height: 32.9, megapixels: 50.0 },
+      { label: 'Hasselblad H6D-100c', width: 53.4, height: 40.0, megapixels: 100.0 },
+      { label: 'Hasselblad H6D-400c Multi-Shot', width: 53.4, height: 40.0, megapixels: 100.0 },
+      { label: 'Hasselblad H6D-50c', width: 43.8, height: 32.9, megapixels: 50.0 },
     ]
   },
   {
     groupName: 'Kinefinity (Large Format & Super 35)',
     presets: [
       { label: 'MAVO Edge 8K (Large Format)', width: 36.0, height: 24.0, megapixels: 44.7 },
-      { label: 'MAVO Edge 6K / MAVO mark2 LF', width: 36.0, height: 24.0, megapixels: 24.0 },
-      { label: 'MAVO mark2 S35 / MAVO S35', width: 23.5, height: 15.6, megapixels: 24.0 },
+      { label: 'MAVO Edge 6K', width: 36.0, height: 24.0, megapixels: 24.0 },
+      { label: 'MAVO mark2 LF', width: 36.0, height: 24.0, megapixels: 24.0 },
+      { label: 'MAVO mark2 S35', width: 23.5, height: 15.6, megapixels: 24.0 },
+      { label: 'MAVO S35', width: 23.5, height: 15.6, megapixels: 24.0 },
       { label: 'TERRA 4K', width: 23.5, height: 15.6, megapixels: 9.6 },
     ]
   },
@@ -208,10 +251,17 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
     groupName: 'Leica (M, SL, Q & S Systems)',
     presets: [
       { label: 'Leica S3 (Medium Format)', width: 45.0, height: 30.0, megapixels: 64.0 },
-      { label: 'Leica SL3 / M11 / M11-P / Q3', width: 35.8, height: 23.9, megapixels: 60.3 },
-      { label: 'Leica SL2 / M10-R / Q2', width: 35.8, height: 23.9, megapixels: 47.3 },
-      { label: 'Leica SL2-S / M10 / Q (Typ 116)', width: 35.8, height: 23.9, megapixels: 24.6 },
-      { label: 'Leica CL / TL2 (APS-C)', width: 23.6, height: 15.7, megapixels: 24.2 },
+      { label: 'Leica SL3', width: 35.8, height: 23.9, megapixels: 60.3 },
+      { label: 'Leica M11 / M11-P / M11-D', width: 35.8, height: 23.9, megapixels: 60.3 },
+      { label: 'Leica Q3 / Q3 43', width: 35.8, height: 23.9, megapixels: 60.3 },
+      { label: 'Leica SL2', width: 35.8, height: 23.9, megapixels: 47.3 },
+      { label: 'Leica M10-R', width: 35.8, height: 23.9, megapixels: 40.0 },
+      { label: 'Leica Q2', width: 35.8, height: 23.9, megapixels: 47.3 },
+      { label: 'Leica SL2-S', width: 35.8, height: 23.9, megapixels: 24.6 },
+      { label: 'Leica M10 / M10-P', width: 35.8, height: 23.9, megapixels: 24.0 },
+      { label: 'Leica Q (Typ 116)', width: 35.8, height: 23.9, megapixels: 24.2 },
+      { label: 'Leica CL (APS-C)', width: 23.6, height: 15.7, megapixels: 24.2 },
+      { label: 'Leica TL2 (APS-C)', width: 23.6, height: 15.7, megapixels: 24.2 },
       { label: 'Leica D-Lux 8 / 7 (Four Thirds)', width: 17.3, height: 13.0, megapixels: 17.0 },
     ]
   },
@@ -227,60 +277,94 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
   {
     groupName: 'Nikon Mirrorless (FX & DX)',
     presets: [
-      { label: 'Z 9 / Z 8 / Z 7II / Z 7', width: 35.9, height: 23.9, megapixels: 45.7 },
-      { label: 'Z f / Z 6III / Z 6II / Z 6', width: 35.9, height: 23.9, megapixels: 24.5 },
-      { label: 'Z 5', width: 35.9, height: 23.9, megapixels: 24.3 },
-      { label: 'Z 50 / Z fc / Z 30 (DX)', width: 23.5, height: 15.7, megapixels: 20.9 },
+      { label: 'Nikon Z9', width: 35.9, height: 23.9, megapixels: 45.7 },
+      { label: 'Nikon Z8', width: 35.9, height: 23.9, megapixels: 45.7 },
+      { label: 'Nikon Z7 II', width: 35.9, height: 23.9, megapixels: 45.7 },
+      { label: 'Nikon Z7', width: 35.9, height: 23.9, megapixels: 45.7 },
+      { label: 'Nikon Z6 III', width: 35.9, height: 23.9, megapixels: 24.5 },
+      { label: 'Nikon Z6 II', width: 35.9, height: 23.9, megapixels: 24.5 },
+      { label: 'Nikon Z6', width: 35.9, height: 23.9, megapixels: 24.5 },
+      { label: 'Nikon Z f', width: 35.9, height: 23.9, megapixels: 24.5 },
+      { label: 'Nikon Z5', width: 35.9, height: 23.9, megapixels: 24.3 },
+      { label: 'Nikon Z50 (DX)', width: 23.5, height: 15.7, megapixels: 20.9 },
+      { label: 'Nikon Z fc (DX)', width: 23.5, height: 15.7, megapixels: 20.9 },
+      { label: 'Nikon Z30 (DX)', width: 23.5, height: 15.7, megapixels: 20.9 },
     ]
   },
   {
     groupName: 'Nikon DSLR (FX & DX)',
     presets: [
-      { label: 'D850', width: 35.9, height: 23.9, megapixels: 45.7 },
-      { label: 'D810 / D800', width: 35.9, height: 24.0, megapixels: 36.3 },
-      { label: 'D780 / D750', width: 35.9, height: 23.9, megapixels: 24.5 },
-      { label: 'D6 / D5', width: 35.9, height: 23.9, megapixels: 20.8 },
-      { label: 'D7200 / D5600 / D3500 (DX)', width: 23.5, height: 15.6, megapixels: 24.2 },
-      { label: 'D500 / D7500 (DX)', width: 23.5, height: 15.7, megapixels: 20.9 },
+      { label: 'Nikon D850', width: 35.9, height: 23.9, megapixels: 45.7 },
+      { label: 'Nikon D810', width: 35.9, height: 24.0, megapixels: 36.3 },
+      { label: 'Nikon D800 / D800E', width: 35.9, height: 24.0, megapixels: 36.3 },
+      { label: 'Nikon D780', width: 35.9, height: 23.9, megapixels: 24.5 },
+      { label: 'Nikon D750', width: 35.9, height: 23.9, megapixels: 24.3 },
+      { label: 'Nikon D6', width: 35.9, height: 23.9, megapixels: 20.8 },
+      { label: 'Nikon D5', width: 35.9, height: 23.9, megapixels: 20.8 },
+      { label: 'Nikon D500 (DX)', width: 23.5, height: 15.7, megapixels: 20.9 },
+      { label: 'Nikon D7500 (DX)', width: 23.5, height: 15.7, megapixels: 20.9 },
+      { label: 'Nikon D7200 (DX)', width: 23.5, height: 15.6, megapixels: 24.2 },
+      { label: 'Nikon D5600 (DX)', width: 23.5, height: 15.6, megapixels: 24.2 },
+      { label: 'Nikon D3500 (DX)', width: 23.5, height: 15.6, megapixels: 24.2 },
     ]
   },
   {
     groupName: 'Olympus / OM System (MFT)',
     presets: [
-      { label: 'OM-1 Mark II / OM-1 / OM-5', width: 17.3, height: 13.0, megapixels: 20.4 },
-      { label: 'E-M1X / E-M1 Mark III / E-M5 III', width: 17.3, height: 13.0, megapixels: 20.4 },
-      { label: 'E-M10 Mark IV / PEN-F / PEN E-P7', width: 17.3, height: 13.0, megapixels: 20.3 },
-      { label: 'E-M10 Mark III / E-M5 II / PEN E-PL10', width: 17.3, height: 13.0, megapixels: 16.1 },
+      { label: 'OM System OM-1 Mark II', width: 17.3, height: 13.0, megapixels: 20.4 },
+      { label: 'OM System OM-1', width: 17.3, height: 13.0, megapixels: 20.4 },
+      { label: 'OM System OM-5', width: 17.3, height: 13.0, megapixels: 20.4 },
+      { label: 'Olympus E-M1X', width: 17.3, height: 13.0, megapixels: 20.4 },
+      { label: 'Olympus E-M1 Mark III', width: 17.3, height: 13.0, megapixels: 20.4 },
+      { label: 'Olympus E-M5 Mark III', width: 17.3, height: 13.0, megapixels: 20.4 },
+      { label: 'Olympus E-M10 Mark IV', width: 17.3, height: 13.0, megapixels: 20.3 },
+      { label: 'Olympus PEN-F', width: 17.3, height: 13.0, megapixels: 20.3 },
+      { label: 'Olympus PEN E-P7', width: 17.3, height: 13.0, megapixels: 20.3 },
+      { label: 'Olympus E-M10 Mark III', width: 17.3, height: 13.0, megapixels: 16.1 },
     ]
   },
   {
     groupName: 'Panasonic Lumix (S & G Series)',
     presets: [
-      { label: 'Lumix S1R (Full Frame)', width: 35.6, height: 23.8, megapixels: 47.3 },
-      { label: 'Lumix S5 II / S5 IIX / S5 / S9 / S1H', width: 35.6, height: 23.8, megapixels: 24.2 },
-      { label: 'Lumix GH6 / G9 II (MFT)', width: 17.3, height: 13.0, megapixels: 25.2 },
-      { label: 'Lumix GH5 II / GH5 / G9', width: 17.3, height: 13.0, megapixels: 20.3 },
-      { label: 'Lumix GH5S / BGH1', width: 17.3, height: 13.0, megapixels: 10.2 },
+      { label: 'Lumix S1R', width: 35.6, height: 23.8, megapixels: 47.3 },
+      { label: 'Lumix S1H', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Lumix S1', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Lumix S5 II', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Lumix S5 IIX', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Lumix S5', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Lumix S9', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Lumix GH6 (MFT)', width: 17.3, height: 13.0, megapixels: 25.2 },
+      { label: 'Lumix G9 II (MFT)', width: 17.3, height: 13.0, megapixels: 25.2 },
+      { label: 'Lumix GH5 II (MFT)', width: 17.3, height: 13.0, megapixels: 20.3 },
+      { label: 'Lumix GH5 (MFT)', width: 17.3, height: 13.0, megapixels: 20.3 },
+      { label: 'Lumix G9 (MFT)', width: 17.3, height: 13.0, megapixels: 20.3 },
+      { label: 'Lumix GH5S (MFT)', width: 17.3, height: 13.0, megapixels: 10.2 },
+      { label: 'Lumix BGH1 (MFT)', width: 17.3, height: 13.0, megapixels: 10.2 },
       { label: 'AU-EVA1 (Super 35 Cine)', width: 24.6, height: 13.8, megapixels: 17.3 },
-      { label: 'VariCam LT / 35', width: 24.5, height: 13.8, megapixels: 8.9 },
+      { label: 'VariCam LT / 35 (Super 35)', width: 24.5, height: 13.8, megapixels: 8.9 },
     ]
   },
   {
     groupName: 'Pentax (Medium Format, FF, APS-C)',
     presets: [
       { label: 'Pentax 645Z (Medium Format)', width: 43.8, height: 32.8, megapixels: 51.4 },
-      { label: 'Pentax K-1 Mark II / K-1 (FF)', width: 35.9, height: 24.0, megapixels: 36.4 },
-      { label: 'Pentax K-3 Mark III / Monochrome (APS-C)', width: 23.3, height: 15.5, megapixels: 25.7 },
-      { label: 'Pentax KF / K-70 / KP', width: 23.5, height: 15.6, megapixels: 24.2 },
+      { label: 'Pentax K-1 Mark II (FF)', width: 35.9, height: 24.0, megapixels: 36.4 },
+      { label: 'Pentax K-1 (FF)', width: 35.9, height: 24.0, megapixels: 36.4 },
+      { label: 'Pentax K-3 Mark III (APS-C)', width: 23.3, height: 15.5, megapixels: 25.7 },
+      { label: 'Pentax KF (APS-C)', width: 23.5, height: 15.6, megapixels: 24.2 },
+      { label: 'Pentax K-70 (APS-C)', width: 23.5, height: 15.6, megapixels: 24.2 },
     ]
   },
   {
     groupName: 'RED Digital Cinema',
     presets: [
-      { label: 'V-RAPTOR [X] 8K VV / XL [X]', width: 40.96, height: 21.60, megapixels: 35.4 },
+      { label: 'V-RAPTOR [X] 8K VV', width: 40.96, height: 21.60, megapixels: 35.4 },
+      { label: 'V-RAPTOR XL [X] 8K VV', width: 40.96, height: 21.60, megapixels: 35.4 },
+      { label: 'V-RAPTOR 8K VV', width: 40.96, height: 21.60, megapixels: 35.4 },
       { label: 'MONSTRO 8K VV', width: 40.96, height: 21.60, megapixels: 35.4 },
-      { label: 'V-RAPTOR 8K S35 / XL S35', width: 26.21, height: 13.82, megapixels: 35.4 },
-      { label: 'KOMODO-X 6K / KOMODO 6K', width: 27.03, height: 14.26, megapixels: 19.9 },
+      { label: 'V-RAPTOR 8K S35', width: 26.21, height: 13.82, megapixels: 35.4 },
+      { label: 'KOMODO-X 6K', width: 27.03, height: 14.26, megapixels: 19.9 },
+      { label: 'KOMODO 6K', width: 27.03, height: 14.26, megapixels: 19.9 },
       { label: 'HELIUM 8K S35', width: 29.90, height: 15.77, megapixels: 35.4 },
       { label: 'DRAGON-X 6K S35', width: 30.70, height: 15.80, megapixels: 19.4 },
       { label: 'GEMINI 5K S35', width: 30.72, height: 18.00, megapixels: 15.4 },
@@ -289,9 +373,11 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
   {
     groupName: 'Samsung (NX Mount)',
     presets: [
-      { label: 'NX1 / NX500', width: 23.5, height: 15.7, megapixels: 28.2 },
-      { label: 'NX30 / NX300 / NX300M', width: 23.5, height: 15.7, megapixels: 20.3 },
-      { label: 'NX Mini (1-inch)', width: 13.2, height: 8.8, megapixels: 20.5 },
+      { label: 'Samsung NX1', width: 23.5, height: 15.7, megapixels: 28.2 },
+      { label: 'Samsung NX500', width: 23.5, height: 15.7, megapixels: 28.2 },
+      { label: 'Samsung NX30', width: 23.5, height: 15.7, megapixels: 20.3 },
+      { label: 'Samsung NX300', width: 23.5, height: 15.7, megapixels: 20.3 },
+      { label: 'Samsung NX Mini (1-inch)', width: 13.2, height: 8.8, megapixels: 20.5 },
     ]
   },
   {
@@ -306,26 +392,43 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
   {
     groupName: 'Sony Cinema Line',
     presets: [
-      { label: 'VENICE 2 8K', width: 35.9, height: 24.0, megapixels: 50.0 },
-      { label: 'BURANO', width: 35.9, height: 24.0, megapixels: 41.9 },
-      { label: 'VENICE 1 / VENICE 2 6K', width: 35.6, height: 23.8, megapixels: 24.8 },
-      { label: 'FX9', width: 35.6, height: 23.8, megapixels: 20.5 },
-      { label: 'FX6 / FX3 / FR7', width: 35.6, height: 23.8, megapixels: 12.1 },
-      { label: 'FX30 (Super 35)', width: 23.5, height: 15.6, megapixels: 26.0 },
-      { label: 'FS7 II / FS7 / FS5', width: 23.6, height: 13.3, megapixels: 11.6 },
+      { label: 'Sony VENICE 2 8K', width: 35.9, height: 24.0, megapixels: 50.0 },
+      { label: 'Sony VENICE 2 6K', width: 35.6, height: 23.8, megapixels: 24.8 },
+      { label: 'Sony VENICE 1', width: 35.6, height: 23.8, megapixels: 24.8 },
+      { label: 'Sony BURANO', width: 35.9, height: 24.0, megapixels: 41.9 },
+      { label: 'Sony FX9', width: 35.6, height: 23.8, megapixels: 20.5 },
+      { label: 'Sony FX6', width: 35.6, height: 23.8, megapixels: 12.1 },
+      { label: 'Sony FX3', width: 35.6, height: 23.8, megapixels: 12.1 },
+      { label: 'Sony FR7', width: 35.6, height: 23.8, megapixels: 12.1 },
+      { label: 'Sony FX30 (Super 35)', width: 23.5, height: 15.6, megapixels: 26.0 },
+      { label: 'Sony FS7 II', width: 23.6, height: 13.3, megapixels: 11.6 },
+      { label: 'Sony FS7', width: 23.6, height: 13.3, megapixels: 11.6 },
+      { label: 'Sony FS5', width: 23.6, height: 13.3, megapixels: 11.6 },
     ]
   },
   {
     groupName: 'Sony Alpha (Full Frame & APS-C)',
     presets: [
-      { label: 'A7R V / A7R IV / A7CR', width: 35.6, height: 23.8, megapixels: 61.0 },
-      { label: 'A1', width: 35.6, height: 23.8, megapixels: 50.1 },
-      { label: 'A7R III / A7R II', width: 35.6, height: 23.8, megapixels: 42.4 },
-      { label: 'A7 IV / A7C II', width: 35.6, height: 23.8, megapixels: 33.0 },
-      { label: 'A9 III / A9 II / A7 III / A7C', width: 35.6, height: 23.8, megapixels: 24.2 },
-      { label: 'A7S III / ZV-E1', width: 35.6, height: 23.8, megapixels: 12.1 },
-      { label: 'A6700 (APS-C)', width: 23.5, height: 15.6, megapixels: 26.0 },
-      { label: 'A6600 / A6400 / ZV-E10', width: 23.5, height: 15.6, megapixels: 24.2 },
+      { label: 'Sony A1', width: 35.6, height: 23.8, megapixels: 50.1 },
+      { label: 'Sony A9 III', width: 35.6, height: 23.8, megapixels: 24.6 },
+      { label: 'Sony A9 II', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Sony A9', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Sony A7R V', width: 35.6, height: 23.8, megapixels: 61.0 },
+      { label: 'Sony A7R IV', width: 35.6, height: 23.8, megapixels: 61.0 },
+      { label: 'Sony A7CR', width: 35.6, height: 23.8, megapixels: 61.0 },
+      { label: 'Sony A7R III', width: 35.6, height: 23.8, megapixels: 42.4 },
+      { label: 'Sony A7R II', width: 35.6, height: 23.8, megapixels: 42.4 },
+      { label: 'Sony A7S III', width: 35.6, height: 23.8, megapixels: 12.1 },
+      { label: 'Sony ZV-E1', width: 35.6, height: 23.8, megapixels: 12.1 },
+      { label: 'Sony A7 IV', width: 35.6, height: 23.8, megapixels: 33.0 },
+      { label: 'Sony A7C II', width: 35.6, height: 23.8, megapixels: 33.0 },
+      { label: 'Sony A7 III', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Sony A7C', width: 35.6, height: 23.8, megapixels: 24.2 },
+      { label: 'Sony A6700 (APS-C)', width: 23.5, height: 15.6, megapixels: 26.0 },
+      { label: 'Sony A6600 (APS-C)', width: 23.5, height: 15.6, megapixels: 24.2 },
+      { label: 'Sony A6400 (APS-C)', width: 23.5, height: 15.6, megapixels: 24.2 },
+      { label: 'Sony ZV-E10 II (APS-C)', width: 23.5, height: 15.6, megapixels: 26.0 },
+      { label: 'Sony ZV-E10 (APS-C)', width: 23.5, height: 15.6, megapixels: 24.2 },
     ]
   }
 ];
