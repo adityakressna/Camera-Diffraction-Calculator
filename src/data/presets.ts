@@ -1,4 +1,4 @@
-import { PresetGroup } from '../types';
+import { PresetGroup, CameraPreset } from '../types';
 
 export const F_STOPS = [
   1.4, 1.6, 1.8, 2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 4.0,
@@ -329,6 +329,31 @@ export const CAMERA_PRESET_GROUPS: PresetGroup[] = [
     ]
   }
 ];
+
+export interface FlattenedPreset extends CameraPreset {
+  key: string;
+  groupName: string;
+}
+
+export function getPresetKey(groupName: string, preset: CameraPreset): string {
+  return preset.id || `${groupName}::${preset.label}`;
+}
+
+export const ALL_CAMERA_PRESETS: FlattenedPreset[] = CAMERA_PRESET_GROUPS.flatMap(grp =>
+  grp.presets.map(p => ({
+    ...p,
+    key: getPresetKey(grp.groupName, p),
+    groupName: grp.groupName,
+  }))
+);
+
+export const CAMERA_PRESET_MAP: Record<string, FlattenedPreset> = ALL_CAMERA_PRESETS.reduce(
+  (acc, curr) => {
+    acc[curr.key] = curr;
+    return acc;
+  },
+  {} as Record<string, FlattenedPreset>
+);
 
 export const FILTERS = [
   { value: 'none', labelKey: 'f_none', defaultNm: null },

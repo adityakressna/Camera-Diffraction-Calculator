@@ -4,6 +4,7 @@ export type Language = 'en' | 'id';
 export type AnamorphicSqueeze = 1.0 | 1.33 | 1.5 | 1.8 | 2.0;
 
 export interface CameraPreset {
+  id?: string;
   label: string;
   width: number;
   height: number;

@@ -6,6 +6,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import {
   CAMERA_PRESET_GROUPS,
+  CAMERA_PRESET_MAP,
+  getPresetKey,
   F_STOPS,
   STOPS_LABELS,
   FOCAL_PRESETS,
@@ -44,7 +46,7 @@ export default function App() {
     anamorphicSqueeze: 1.0,
   });
 
-  const [selectedPreset, setSelectedPreset] = useState<string>('35.6,23.8,12.1');
+  const [selectedPreset, setSelectedPreset] = useState<string>('Sony Cinema Line::FX6 / FX3 / FR7');
 
   // Sync dark theme class on document.body
   useEffect(() => {
@@ -77,23 +79,17 @@ export default function App() {
     setSelectedPreset(val);
     if (val === 'custom') return;
 
-    const [wStr, hStr, mpStr] = val.split(',');
-    const w = parseFloat(wStr);
-    const h = parseFloat(hStr);
-    const mp = parseFloat(mpStr);
-
-    // Check if selected option is from a Film category
-    const selectedOpt = e.target.selectedOptions[0];
-    const groupLabel = selectedOpt?.parentElement?.getAttribute('label') || '';
-    const isFilm = groupLabel.includes('Film');
-
-    setState(prev => ({
-      ...prev,
-      sensorWidth: w,
-      sensorHeight: h,
-      megapixels: mp,
-      mode: isFilm ? 'film' : prev.mode,
-    }));
+    const preset = CAMERA_PRESET_MAP[val];
+    if (preset) {
+      const isFilm = Boolean(preset.isFilm || preset.groupName.toLowerCase().includes('film'));
+      setState(prev => ({
+        ...prev,
+        sensorWidth: preset.width,
+        sensorHeight: preset.height,
+        megapixels: preset.megapixels,
+        mode: isFilm ? 'film' : (prev.mode === 'film' ? 'photo' : prev.mode),
+      }));
+    }
   };
 
   // Handler for filter dropdown
@@ -128,12 +124,9 @@ export default function App() {
 
   const currentPresetLabel = useMemo(() => {
     if (selectedPreset === 'custom') return 'Custom Dimensions';
-    for (const group of CAMERA_PRESET_GROUPS) {
-      for (const p of group.presets) {
-        if (`${p.width},${p.height},${p.megapixels}` === selectedPreset) {
-          return `${p.label} (${group.groupName})`;
-        }
-      }
+    const preset = CAMERA_PRESET_MAP[selectedPreset];
+    if (preset) {
+      return `${preset.label} (${preset.groupName})`;
     }
     return `${state.sensorWidth} x ${state.sensorHeight} mm`;
   }, [selectedPreset, state.sensorWidth, state.sensorHeight]);
@@ -200,11 +193,14 @@ export default function App() {
                     <option value="custom">{t.custom_dim}</option>
                     {CAMERA_PRESET_GROUPS.map(grp => (
                       <optgroup key={grp.groupName} label={grp.groupName}>
-                        {grp.presets.map(p => (
-                          <option key={`${p.label}-${p.width}`} value={`${p.width},${p.height},${p.megapixels}`}>
-                            {p.label}
-                          </option>
-                        ))}
+                        {grp.presets.map(p => {
+                          const key = getPresetKey(grp.groupName, p);
+                          return (
+                            <option key={key} value={key}>
+                              {p.label}
+                            </option>
+                          );
+                        })}
                       </optgroup>
                     ))}
                   </select>
@@ -290,7 +286,10 @@ export default function App() {
                         value={state.megapixels}
                         step={0.1}
                         min={0.1}
-                        onChange={e => setState(prev => ({ ...prev, megapixels: parseFloat(e.target.value) || 0 }))}
+                        onChange={e => {
+                          setSelectedPreset('custom');
+                          setState(prev => ({ ...prev, megapixels: parseFloat(e.target.value) || 0 }));
+                        }}
                         className="w-full bg-transparent outline-none font-mono text-[14px] sm:text-lg text-[var(--text-body)] font-bold text-center"
                       />
                       <span className="font-mono text-[13px] sm:text-base text-[var(--text-muted)] font-bold ml-1">
